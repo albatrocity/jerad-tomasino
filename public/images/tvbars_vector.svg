@@ -1,0 +1,53 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 6144 6126" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <g transform="matrix(1.00801,0,0,1,-28.1202,0)">
+        <g id="background">
+            <rect x="15" y="-28" width="6117" height="6150" style="fill:white;"/>
+        </g>
+    </g>
+    <g id="TVBars">
+        <g transform="matrix(0.931298,0,0,1.00507,68.3658,-10.1468)">
+            <g id="2 yellow">
+                <rect x="768" y="1577" width="591" height="2985" style="fill:rgb(255,218,53);"/>
+            </g>
+        </g>
+        <g transform="matrix(0.898215,0,0,0.99708,191.753,14.8876)">
+            <g id="3 cyan">
+                <rect x="1558" y="989" width="601" height="4110" style="fill:rgb(0,255,237);"/>
+            </g>
+        </g>
+        <g transform="matrix(0.951287,0,0,0.995951,136.457,22.8668)">
+            <g id="4 green">
+                <rect x="2340" y="461" width="579" height="5186" style="fill:rgb(52,233,88);"/>
+            </g>
+        </g>
+        <g transform="matrix(0.961679,0,0,0.995558,129.927,21.0433)">
+            <g id="5 magenta">
+                <rect x="3260" y="460" width="548" height="5156" style="fill:rgb(255,115,200);"/>
+            </g>
+        </g>
+        <g transform="matrix(0.950814,0,0,0.998268,202.039,6.69533)">
+            <g id="6 red">
+                <rect x="4006" y="979" width="544" height="4094" style="fill:rgb(255,82,82);"/>
+            </g>
+        </g>
+        <g transform="matrix(0.999845,0,0,1.00003,1.2535,-0.0482508)">
+            <g id="7 blue">
+                <g id="7 blue1">
+                    <rect x="4770" y="1593" width="530" height="2985" style="fill:rgb(87,94,184);"/>
+                </g>
+            </g>
+        </g>
+        <g transform="matrix(1.05195,0,0,1.00672,-310.935,-40.5592)">
+            <g id="8 black">
+                <rect x="5562" y="2119" width="462" height="1983" style="fill:rgb(34,34,34);"/>
+            </g>
+        </g>
+        <g transform="matrix(0.896104,0,0,1.00195,59.3377,-13.0287)">
+            <g id="1 white">
+                <rect x="61" y="2061" width="539" height="1992" style="fill:rgb(230,230,230);"/>
+            </g>
+        </g>
+    </g>
+</svg>
