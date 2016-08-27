@@ -2,16 +2,34 @@
   "name": "jerad",
   "version": "1.0.0",
   "description": "",
+  "private": true,
+  "engines": {
+    "node": "6.4.0"
+  },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile-js": "browserify public/js/*.js -o public/compiled/js/bundle.js -t [ babelify --presets [ es2015 react ] ]",
+    "watch-js": "watchify public/js/*.js -o public/compiled/js/bundle.js  -t [ babelify --presets [ es2015 react ] ]",
+    "start": "concurrently --kill-others 'nodemon server.js --ignore /public/**/*.js' 'npm run watch-js'"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
     "good": "^6.6.0",
     "good-console": "^5.3.1",
     "hapi": "^13.3.0",
-    "inert": "^3.2.0"
+    "howler": "^2.0.0",
+    "inert": "^3.2.0",
+    "nes": "^6.3.1",
+    "snapsvg": "^0.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.4.0",
+    "watchify": "^3.7.0"
   }
 }
