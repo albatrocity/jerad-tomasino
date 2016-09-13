@@ -3501,21 +3501,16 @@ var player = new Howl({
 var currentTrack = 1;
 
 var loadTrack = function loadTrack(trackNumber) {
-  player.src = [trackList[trackNumber].mp3];
+  player.src = [trackList[currentTrack - 1].mp3];
   player.load();
   return player;
 };
 
 client.connect(function (err) {
   console.log('socket connected');
-  var playbackInt = void 0,
-      listenerId = void 0,
+  var playbackInt;
+  var listenerId = void 0,
       currentPosition = void 0;
-  var handler = function handler(update, flags) {
-
-    // update -> { id: 5, status: 'complete' }
-    // Second publish is not received (doesn't match)
-  };
 
   var publishProgress = function publishProgress(timestamp) {
     console.log('publishProgress');
@@ -3542,10 +3537,8 @@ client.connect(function (err) {
   player.on('play', function (timestamp) {
     listenerId = timestamp;
     client.request('/add_listener?listenerId=' + listenerId);
-    playbackInt = setInterval(publishProgress, 1000);
+    playbackInt = setInterval(publishProgress, 500);
   });
-
-  // track1.play()
 });
 
 },{"../../lib/tracklist":1,"howler":2,"nes/client":3}],6:[function(require,module,exports){

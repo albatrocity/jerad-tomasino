@@ -1,15 +1,15 @@
-'use strict';
+'use strict'
 
 const Hapi            = require('hapi')
 const Nes             = require('nes')
 const ListenerManager = require('./lib/listenerManager')
 
 // Create a server with a host and port
-const server = new Hapi.Server();
+const server = new Hapi.Server()
 server.connection({
-    host: '0.0.0.0',
-    port: process.env.PORT || 8000
-});
+  host: '0.0.0.0',
+  port: process.env.PORT || 8000
+})
 
 
 let goodOptions = {
@@ -43,7 +43,7 @@ server.register([{
     path: '/current_position',
     handler: (request, reply) => {
       const { query } = request
-      console.log(manager.currentPosition());
+      console.log(manager.currentPosition())
       reply(manager.currentPosition())
     }
   })
@@ -54,7 +54,7 @@ server.register([{
     handler: (request, reply) => {
       const { query } = request
       manager.addListener(query.listenerId)
-      reply()
+      reply(manager.currentPosition())
     }
   })
 
@@ -63,9 +63,9 @@ server.register([{
     method: 'GET',
     path:'/',
     handler: function (request, reply) {
-      return reply.file('./public/index.html');
+      return reply.file('./public/index.html')
     }
-  });
+  })
 
 
   server.route({
@@ -77,35 +77,36 @@ server.register([{
         listing: true
       }
     }
-  });
+  })
 
   server.route({
     method: 'GET',
     path: '/{filename}',
     handler: {
       file: function (request) {
-        return `./public/${request.params.filename}`;
+        return `./public/${request.params.filename}`
       }
     }
-  });
+  })
 
   server.route({
     method: 'GET',
     path: '/bundle.js',
     handler: {
       file: function (request) {
-        return `./public/compiled/js/bundle.js`;
+        return `./public/compiled/js/bundle.js`
       }
     }
-  });
+  })
 
   // Start the server
   server.start((err) => {
 
     if (err) {
-      throw err;
+      throw err
     }
-    console.log('Server running at:', server.info.uri);
-  });
+    setInterval(() => manager.pruneListeners(), 10000)
+    console.log('Server running at:', server.info.uri)
+  })
 
 })
