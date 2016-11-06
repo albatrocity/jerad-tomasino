@@ -1,7 +1,7 @@
 const Howler = require('howler')
 const Howl   = Howler.Howl
 const Nes    = require('nes/client')
-const client = new Nes.Client('ws://localhost:8000')
+const client = new Nes.Client()
 
 let player, preloader
 
