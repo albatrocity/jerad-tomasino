@@ -1,12 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
-
-module.exports = [{
-  title: "Open the Door",
-  mp3: 'http://ross-brown.s3.amazonaws.com/jct/01_Open%20the%20Door.mp3'
-}];
-
-},{}],2:[function(require,module,exports){
 (function (global){
 /*!
  *  howler.js v2.0.0
@@ -2750,12 +2742,12 @@ module.exports = [{
 })();
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./dist/client');
 
-},{"./dist/client":4}],4:[function(require,module,exports){
+},{"./dist/client":3}],3:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -3484,71 +3476,63 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
 var Howler = require('howler');
 var Howl = Howler.Howl;
 var Nes = require('nes/client');
 var client = new Nes.Client('ws://localhost:8000');
-var trackList = require('../../lib/tracklist');
 
-var player = new Howl({
-  src: trackList[0].mp3,
-  preload: false,
-  autoplay: false
-});
-var currentTrack = 1;
+var player = void 0,
+    preloader = void 0;
 
-var loadTrack = function loadTrack(trackNumber) {
-  player.src = [trackList[trackNumber].mp3];
-  player.load();
-  return player;
-};
+function preloadTrack(src) {
+  if (preloader) {
+    preloader.unload();
+  }
+  preloader = new Howl({
+    src: src,
+    preload: false,
+    autoplay: false
+  }).load();
+}
 
 client.connect(function (err) {
-  console.log('socket connected');
-  var playbackInt = void 0,
-      listenerId = void 0,
-      currentPosition = void 0;
-  var handler = function handler(update, flags) {
-
-    // update -> { id: 5, status: 'complete' }
-    // Second publish is not received (doesn't match)
-  };
-
-  var publishProgress = function publishProgress(timestamp) {
-    console.log('publishProgress');
-    client.request('/audio_progress?listenerId=' + listenerId + '&seek=' + player.seek() + '&track=' + currentTrack);
-  };
-
   var seekToCurrentPosition = function seekToCurrentPosition() {
     client.request('/current_position', function (err, payload) {
-      console.log(payload);
-      player.seek(payload.position);
+      player.seek(payload.time);
       player.play();
+      if (payload.preload) {
+        preloadTrack(payload.preload);
+      }
     });
   };
 
-  client.request('/current_position', function (err, payload) {
-    console.log(payload);
-    if (isNaN(payload.track)) {
-      //first listener
-      // return loadTrack(1).play()
+  var loadTrack = function loadTrack(track) {
+    if (player) {
+      player.unload();
     }
-    loadTrack(payload.track).on('load', seekToCurrentPosition);
-  });
+    player = new Howl({
+      src: track.mp3,
+      preload: false,
+      autoplay: false
+    });
+    player.on('load', seekToCurrentPosition);
+    player.load();
+    return player;
+  };
 
-  player.on('play', function (timestamp) {
-    listenerId = timestamp;
-    client.request('/add_listener?listenerId=' + listenerId);
-    playbackInt = setInterval(publishProgress, 1000);
-  });
+  function getAndPlayTrack() {
+    client.request('/current_position', function (err, payload) {
+      loadTrack(payload).on('end', getAndPlayTrack);
+    });
+  }
 
-  // track1.play()
+  getAndPlayTrack();
 });
 
-},{"../../lib/tracklist":1,"howler":2,"nes/client":3}],6:[function(require,module,exports){
+},{"howler":1,"nes/client":2}],5:[function(require,module,exports){
 // const Snap = require('snapsvg')
 //
 // document.addEventListener('DOMContentLoaded', function() {
@@ -3567,4 +3551,4 @@ client.connect(function (err) {
 // }, false);
 "use strict";
 
-},{}]},{},[5,6]);
+},{}]},{},[4,5]);

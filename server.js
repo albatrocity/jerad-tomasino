@@ -1,8 +1,7 @@
-'use strict';
-
 const Hapi            = require('hapi')
 const Nes             = require('nes')
 const ListenerManager = require('./lib/listenerManager')
+const tracklist       = require('./lib/tracklist')
 
 // Create a server with a host and port
 const server = new Hapi.Server();
@@ -17,6 +16,18 @@ let goodOptions = {
     reporter: require('good-console'),
     events: { log: ['error'], response: '*' }
   }]
+}
+
+let currentTime = 360
+
+function startLoopTimer() {
+  setInterval(function(){
+    if ( currentTime >= tracklist[tracklist.length-1].end-1) {
+      currentTime = -1
+    }
+    currentTime = currentTime + 1
+    console.log(currentTime)
+  }, 1000)
 }
 
 server.register([{
@@ -43,8 +54,7 @@ server.register([{
     path: '/current_position',
     handler: (request, reply) => {
       const { query } = request
-      console.log(manager.currentPosition());
-      reply(manager.currentPosition())
+      reply(manager.currentPlayback(currentTime))
     }
   })
 
@@ -53,7 +63,7 @@ server.register([{
     path: '/add_listener',
     handler: (request, reply) => {
       const { query } = request
-      manager.addListener(query.listenerId)
+      manager.addListener(query.listenerId, true)
       reply()
     }
   })
@@ -106,6 +116,7 @@ server.register([{
       throw err;
     }
     console.log('Server running at:', server.info.uri);
+    startLoopTimer()
   });
 
 })
