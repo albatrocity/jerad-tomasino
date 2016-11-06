@@ -1,7 +1,6 @@
 const Howler = require('howler')
 const Howl   = Howler.Howl
-const Nes    = require('nes/client')
-const client = new Nes.Client()
+const axios  = require('axios')
 
 let player, preloader
 
@@ -14,16 +13,18 @@ function preloadTrack(src) {
   }).load()
 }
 
-client.connect(function (err) {
-  const seekToCurrentPosition = () => {
-    client.request('/current_position', (err, payload) => {
+(function() {
+  function seekToCurrentPosition() {
+    return axios.get('/current_position').then((res) => {
+      const payload = res.data
       player.seek(payload.time)
       player.play()
       if (payload.preload) { preloadTrack(payload.preload)}
     })
   }
 
-  const loadTrack = (track) => {
+  function loadTrack(track) {
+    console.log(track);
     if (player) {player.unload() }
     player = new Howl({
       src: track.mp3,
@@ -36,10 +37,11 @@ client.connect(function (err) {
   }
 
   function getAndPlayTrack() {
-    client.request('/current_position', (err, payload) => {
-      loadTrack(payload).on('end', getAndPlayTrack)
+    axios.get('/current_position').then((res) => {
+      const payload = res.data
+      return loadTrack(payload).on('end', getAndPlayTrack)
     })
   }
 
   getAndPlayTrack()
-})
+})()

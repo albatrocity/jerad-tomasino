@@ -1,5 +1,4 @@
 const Hapi            = require('hapi')
-const Nes             = require('nes')
 const ListenerManager = require('./lib/listenerManager')
 const tracklist       = require('./lib/tracklist')
 
@@ -34,7 +33,6 @@ server.register([{
   register: require('good'),
   options: goodOptions
 },
-  Nes,
   require('inert')
 ], (err) => {
   let manager = new ListenerManager
