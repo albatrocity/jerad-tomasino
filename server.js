@@ -18,7 +18,7 @@ let goodOptions = {
   }]
 }
 
-let currentTime = 360
+let currentTime = 0
 
 function startLoopTimer() {
   setInterval(function(){
