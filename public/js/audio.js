@@ -25,7 +25,6 @@ function preloadTrack(src) {
   }
 
   function loadTrack(track) {
-    console.log(track);
     if (player) {player.unload() }
     player = new Howl({
       src: track.mp3,
@@ -38,7 +37,6 @@ function preloadTrack(src) {
   }
 
   function getAndPlayTrack() {
-    console.log('get and play track cuz song ended');
     axios.get('/current_position').then((res) => {
       const payload = res.data
       return loadTrack(payload).on('end', getAndPlayTrack)
@@ -54,7 +52,6 @@ function preloadTrack(src) {
 
   getAndPlayTrack()
 
-  console.log(document.getElementById('mute'));
   document.getElementById('mute').addEventListener('click', (e) => {
     e.preventDefault()
     player.mute(audible)

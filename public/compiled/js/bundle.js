@@ -4322,7 +4322,6 @@ function preloadTrack(src) {
   }
 
   function loadTrack(track) {
-    console.log(track);
     if (player) {
       player.unload();
     }
@@ -4337,7 +4336,6 @@ function preloadTrack(src) {
   }
 
   function getAndPlayTrack() {
-    console.log('get and play track cuz song ended');
     axios.get('/current_position').then(function (res) {
       var payload = res.data;
       return loadTrack(payload).on('end', getAndPlayTrack);
@@ -4353,7 +4351,6 @@ function preloadTrack(src) {
 
   getAndPlayTrack();
 
-  console.log(document.getElementById('mute'));
   document.getElementById('mute').addEventListener('click', function (e) {
     e.preventDefault();
     player.mute(audible);
