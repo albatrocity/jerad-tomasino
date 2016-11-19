@@ -4336,6 +4336,7 @@ function preloadTrack(src) {
   }
 
   function getAndPlayTrack() {
+    console.log('get and play track cuz song ended');
     axios.get('/current_position').then(function (res) {
       var payload = res.data;
       return loadTrack(payload).on('end', getAndPlayTrack);
