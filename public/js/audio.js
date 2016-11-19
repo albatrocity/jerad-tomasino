@@ -3,6 +3,7 @@ const Howl   = Howler.Howl
 const axios  = require('axios')
 
 let player, preloader
+let audible = true
 
 function preloadTrack(src) {
   if (preloader) { preloader.unload() }
@@ -44,5 +45,20 @@ function preloadTrack(src) {
     })
   }
 
+  function mutedText(audible) {
+    if (audible) {
+      return 'tune in'
+    }
+    return 'tune out'
+  }
+
   getAndPlayTrack()
+
+  console.log(document.getElementById('mute'));
+  document.getElementById('mute').addEventListener('click', (e) => {
+    e.preventDefault()
+    player.mute(audible)
+    e.target.innerText = mutedText(audible)
+    audible = !audible
+  })
 })()

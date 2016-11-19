@@ -4296,6 +4296,7 @@ var axios = require('axios');
 
 var player = void 0,
     preloader = void 0;
+var audible = true;
 
 function preloadTrack(src) {
   if (preloader) {
@@ -4343,7 +4344,22 @@ function preloadTrack(src) {
     });
   }
 
+  function mutedText(audible) {
+    if (audible) {
+      return 'tune in';
+    }
+    return 'tune out';
+  }
+
   getAndPlayTrack();
+
+  console.log(document.getElementById('mute'));
+  document.getElementById('mute').addEventListener('click', function (e) {
+    e.preventDefault();
+    player.mute(audible);
+    e.target.innerText = mutedText(audible);
+    audible = !audible;
+  });
 })();
 
 },{"axios":1,"howler":26}],29:[function(require,module,exports){
