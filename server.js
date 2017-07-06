@@ -3,11 +3,11 @@ const ListenerManager = require('./lib/listenerManager')
 const tracklist       = require('./lib/tracklist')
 
 // Create a server with a host and port
-const server = new Hapi.Server();
+const server = new Hapi.Server()
 server.connection({
-    host: '0.0.0.0',
-    port: process.env.PORT || 8000
-});
+  host: '0.0.0.0',
+  port: process.env.PORT || 8000
+})
 
 
 let goodOptions = {
@@ -71,9 +71,9 @@ server.register([{
     method: 'GET',
     path:'/',
     handler: function (request, reply) {
-      return reply.file('./public/index.html');
+      return reply.file('./public/index.html')
     }
-  });
+  })
 
 
   server.route({
@@ -85,36 +85,36 @@ server.register([{
         listing: true
       }
     }
-  });
+  })
 
   server.route({
     method: 'GET',
     path: '/{filename}',
     handler: {
       file: function (request) {
-        return `./public/${request.params.filename}`;
+        return `./public/${request.params.filename}`
       }
     }
-  });
+  })
 
   server.route({
     method: 'GET',
     path: '/bundle.js',
     handler: {
       file: function (request) {
-        return `./public/compiled/js/bundle.js`;
+        return `./public/compiled/js/bundle.js`
       }
     }
-  });
+  })
 
   // Start the server
   server.start((err) => {
 
     if (err) {
-      throw err;
+      throw err
     }
-    console.log('Server running at:', server.info.uri);
+    console.log('Server running at:', server.info.uri)
     startLoopTimer()
-  });
+  })
 
 })

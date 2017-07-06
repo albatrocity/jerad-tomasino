@@ -43,19 +43,13 @@ function preloadTrack(src) {
     })
   }
 
-  function mutedText(audible) {
-    if (audible) {
-      return 'tune in'
-    }
-    return 'tune out'
-  }
-
   getAndPlayTrack()
-
-  document.getElementById('mute').addEventListener('click', (e) => {
+  const barsEl = document.getElementById('tvbars')
+  barsEl.addEventListener('click', (e) => {
     e.preventDefault()
+    e.stopPropagation()
     player.mute(audible)
-    e.target.innerText = mutedText(audible)
+    barsEl.classList.toggle('off')
     audible = !audible
   })
 })()

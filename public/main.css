@@ -13,6 +13,23 @@ body, html, #main-header {
   font-style: italic;
 }
 
+.license {
+  text-align: center;
+  font-size: 12px;
+  line-height: 18px;
+  width: 50%;
+  min-width: 300px;
+  margin: 1em auto;
+}
+
+.license a {
+  text-decoration: none;
+}
+
+a[rel='license'] {
+  border-bottom: none;
+}
+
 #info {
   position: absolute;
   top: 50%;
@@ -32,4 +49,50 @@ a {
   color: inherit;
   text-decoration: none;
   border-bottom: 1px solid #000
+}
+
+#tvbars {
+  cursor: pointer;
+}
+
+/*off*/
+#tvbars.off #bar1 {
+  fill: none;
+  stroke: #ffda35;
+  stroke-width: 40px;
+}
+#tvbars.off #bar2 {
+  fill: none;
+  stroke: #00ffed;
+  stroke-width: 40px;
+}
+#tvbars.off #bar3 {
+  fill: none;
+  stroke: #34e958;
+  stroke-width: 40px;
+}
+#tvbars.off #bar4 {
+  fill: none;
+  stroke: #ff73c8;
+  stroke-width: 40px;
+}
+#tvbars.off #bar5 {
+  fill: none;
+  stroke: #ff5252;
+  stroke-width: 40px;
+}
+#tvbars.off #bar6 {
+  fill: none;
+  stroke: #575eb8;
+  stroke-width: 40px;
+}
+#tvbars.off #bar7 {
+  fill: none;
+  stroke: #222;
+  stroke-width: 40px;
+}
+#tvbars.off #bar8 {
+  fill: none;
+  stroke: #e6e6e6;
+  stroke-width: 40px;
 }
