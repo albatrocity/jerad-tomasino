@@ -55,44 +55,48 @@ a {
   cursor: pointer;
 }
 
+#tvbars path, #tvbars.off path {
+  transition: all 0.2s ease-out;
+}
+
+#tvbars path {
+  stroke-width: 0;
+}
+
+#tvbars.off path {
+  stroke-width: 40px;
+}
+
 /*off*/
 #tvbars.off #bar1 {
-  fill: none;
+  fill: rgba(0,0,0,0);
   stroke: #ffda35;
-  stroke-width: 40px;
 }
 #tvbars.off #bar2 {
-  fill: none;
+  fill: rgba(0,0,0,0);
   stroke: #00ffed;
-  stroke-width: 40px;
 }
 #tvbars.off #bar3 {
-  fill: none;
+  fill: rgba(0,0,0,0);
   stroke: #34e958;
-  stroke-width: 40px;
 }
 #tvbars.off #bar4 {
-  fill: none;
+  fill: rgba(0,0,0,0);
   stroke: #ff73c8;
-  stroke-width: 40px;
 }
 #tvbars.off #bar5 {
-  fill: none;
+  fill: rgba(0,0,0,0);
   stroke: #ff5252;
-  stroke-width: 40px;
 }
 #tvbars.off #bar6 {
-  fill: none;
+  fill: rgba(0,0,0,0);
   stroke: #575eb8;
-  stroke-width: 40px;
 }
 #tvbars.off #bar7 {
-  fill: none;
+  fill: rgba(0,0,0,0);
   stroke: #222;
-  stroke-width: 40px;
 }
 #tvbars.off #bar8 {
-  fill: none;
+  fill: rgba(0,0,0,0);
   stroke: #e6e6e6;
-  stroke-width: 40px;
 }
